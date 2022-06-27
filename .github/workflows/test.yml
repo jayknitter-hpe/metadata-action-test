@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test_metadata:
+    runs-on: ubuntu-latest
+    name: Test this action
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test
+        id: test
+        uses: jayknitter-hpe/metadata-action@v0.0.1-alpha.1
+        with:
+          account_ids: "657xxxx"
+      - name: Print results
+        shell: bash
+        run: |
+          echo random-number ${{ steps.test.outputs.repos }}
+          echo random-number ${{ steps.test.outputs.images }}
